@@ -15,59 +15,108 @@
   h1 { font-size: 22px; margin: 0 0 4px; }
   h2 { font-size: 17px; margin: 28px 0 6px; }
   .updated { color: #8e8e93; font-size: 13px; margin: 0 0 8px; }
-  .en { color: #8e8e93; font-size: 13px; }
   p { margin: 6px 0; font-size: 15px; }
   a { color: #0a84ff; }
   footer { margin-top: 32px; font-size: 13px; color: #8e8e93; }
+  .lang-switch { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 8px; }
+  .lang-switch button {
+    font: inherit; font-size: 13px; padding: 4px 12px; cursor: pointer;
+    color: #0a84ff; background: transparent;
+    border: 1px solid rgba(128,128,128,.4); border-radius: 999px;
+  }
+  .lang-switch button[aria-pressed="true"] { color: #fff; background: #0a84ff; border-color: #0a84ff; }
+  body[data-lang="ja"] [lang="en"], body[data-lang="en"] [lang="ja"] { display: none; }
 </style>
 </head>
 <body>
-  <h1>プライバシーポリシー / Privacy Policy</h1>
-  <p class="updated">最終更新日 / Last updated: 2026-06-06</p>
-  <p>本プライバシーポリシーは、Stash（以下「本アプリ」）における個人情報の取り扱いについて定めるものです。</p>
-  <p class="en">This Privacy Policy describes how Stash ("the App") handles your personal information.</p>
+  <nav class="lang-switch">
+    <button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+    <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+  </nav>
 
-  <h2>収集する情報 / Information We Collect</h2>
-  <p><strong>アカウント情報</strong> 本アプリはユーザー登録にメールアドレスとパスワードを使用します。認証は Amazon Cognito を通じて処理され、パスワードは本アプリのサーバーに保存されません。</p>
-  <p class="en">Account Information. The App uses your email address and password for registration. Authentication is processed through Amazon Cognito, and passwords are never stored on our servers.</p>
-  <p><strong>ウィッシュリストデータ</strong> ユーザーが保存した商品情報（URL、商品名、価格、画像URL、ブランド名、カテゴリ、メモ）は Amazon DynamoDB に保存されます。</p>
-  <p class="en">Wishlist Data. Saved product information (URL, product name, price, image URL, brand, category, notes) is stored in Amazon DynamoDB.</p>
-  <p><strong>ページメタデータの自動取得</strong> 商品URLを保存する際、本アプリはそのWebページにアクセスして商品名・価格・画像などのメタデータを自動取得します。この処理はユーザーのデバイス上で行われ、取得したメタデータのみがサーバーに送信されます。</p>
-  <p class="en">Automatic Page Metadata. When saving a product URL, the App accesses the webpage to retrieve metadata such as name, price, and images. This runs on the user's device, and only the retrieved metadata is sent to our servers.</p>
-  <p><strong>カメラ・写真ライブラリ</strong> プロフィール写真の設定のためにカメラおよび写真ライブラリへのアクセスを求める場合があります。撮影・選択した写真はプロフィール表示にのみ使用されます。</p>
-  <p class="en">Camera &amp; Photo Library. The App may request access for setting a profile picture. Photos are used only for profile display.</p>
+  <h1 lang="ja">プライバシーポリシー</h1>
+  <h1 lang="en">Privacy Policy</h1>
+  <p class="updated" lang="ja">最終更新日 2026-06-06</p>
+  <p class="updated" lang="en">Last updated: 2026-06-06</p>
+  <p lang="ja">本プライバシーポリシーは、Stash（以下「本アプリ」）における個人情報の取り扱いについて定めるものです。</p>
+  <p lang="en">This Privacy Policy describes how Stash (&ldquo;the App&rdquo;) handles your personal information.</p>
 
-  <h2>情報の利用目的 / How We Use Your Information</h2>
-  <p>収集した情報は、ユーザーアカウントの認証と管理、ウィッシュリストの保存・同期、アプリ機能の提供の目的にのみ使用します。</p>
-  <p class="en">Information is used only for account authentication and management, saving and syncing wishlist data, and providing app functionality.</p>
+  <h2 lang="ja">収集する情報</h2>
+  <h2 lang="en">Information We Collect</h2>
+  <p lang="ja"><strong>アカウント情報</strong> 本アプリはユーザー登録にメールアドレスとパスワードを使用します。認証は Amazon Cognito を通じて処理され、パスワードは本アプリのサーバーに保存されません。</p>
+  <p lang="en"><strong>Account information.</strong> The App uses your email address and password for registration. Authentication is processed through Amazon Cognito, and passwords are never stored on our servers.</p>
+  <p lang="ja"><strong>ウィッシュリストデータ</strong> ユーザーが保存した商品情報（URL、商品名、価格、画像URL、ブランド名、カテゴリ、メモ）は Amazon DynamoDB に保存されます。</p>
+  <p lang="en"><strong>Wishlist data.</strong> The product information you save (URL, product name, price, image URL, brand, category, notes) is stored in Amazon DynamoDB.</p>
+  <p lang="ja"><strong>ページメタデータの自動取得</strong> 商品URLを保存する際、本アプリはそのWebページにアクセスして商品名・価格・画像などのメタデータを自動取得します。この処理はユーザーのデバイス上で行われ、取得したメタデータのみがサーバーに送信されます。</p>
+  <p lang="en"><strong>Automatic page metadata.</strong> When you save a product URL, the App visits that web page to read metadata such as the name, price and images. This runs on your own device, and only the metadata it finds is sent to our servers.</p>
+  <p lang="ja"><strong>カメラ・写真ライブラリ</strong> プロフィール写真の設定のためにカメラおよび写真ライブラリへのアクセスを求める場合があります。撮影・選択した写真はプロフィール表示にのみ使用されます。</p>
+  <p lang="en"><strong>Camera and photo library.</strong> The App may ask for access so you can set a profile picture. Photos you take or choose are used only to show your profile.</p>
 
-  <h2>第三者への提供 / Third-Party Sharing</h2>
-  <p>本アプリはユーザーの個人情報を第三者に販売、貸与、または共有しません。データの処理・保存には Amazon Cognito（認証）、Amazon DynamoDB（保存）、Amazon API Gateway + AWS Lambda（API処理）を利用しています。</p>
-  <p class="en">The App does not sell, rent, or share your personal information. We use Amazon Cognito, DynamoDB, and API Gateway + Lambda to process and store data.</p>
+  <h2 lang="ja">情報の利用目的</h2>
+  <h2 lang="en">How We Use Your Information</h2>
+  <p lang="ja">収集した情報は、ユーザーアカウントの認証と管理、ウィッシュリストの保存・同期、アプリ機能の提供の目的にのみ使用します。</p>
+  <p lang="en">We use what we collect only to authenticate and manage your account, to save and sync your wishlist, and to provide the features of the App.</p>
 
-  <h2>トラッキング・広告 / Tracking &amp; Advertising</h2>
-  <p>本アプリはユーザーの行動をトラッキングしません。広告は表示されません。アナリティクスツールは使用していません。</p>
-  <p class="en">The App does not track user behavior, shows no advertisements, and uses no analytics tools.</p>
+  <h2 lang="ja">第三者への提供</h2>
+  <h2 lang="en">Third-Party Sharing</h2>
+  <p lang="ja">本アプリはユーザーの個人情報を第三者に販売、貸与、または共有しません。データの処理・保存には Amazon Cognito（認証）、Amazon DynamoDB（保存）、Amazon API Gateway + AWS Lambda（API処理）を利用しています。</p>
+  <p lang="en">We do not sell, rent or share your personal information with third parties. We use Amazon Cognito (authentication), Amazon DynamoDB (storage) and Amazon API Gateway with AWS Lambda (API processing) to handle and store data.</p>
 
-  <h2>データの保管 / Data Storage</h2>
-  <p>ユーザーデータは AWS の東京リージョン（ap-northeast-1）に保管され、通信はすべて HTTPS で暗号化されています。</p>
-  <p class="en">User data is stored in the AWS Tokyo region (ap-northeast-1). All communication is encrypted via HTTPS.</p>
+  <h2 lang="ja">トラッキング・広告</h2>
+  <h2 lang="en">Tracking and Advertising</h2>
+  <p lang="ja">本アプリはユーザーの行動をトラッキングしません。広告は表示されません。アナリティクスツールは使用していません。</p>
+  <p lang="en">The App does not track your behaviour, shows no advertising, and uses no analytics tools.</p>
 
-  <h2>データの削除 / Data Deletion</h2>
-  <p>ユーザーはアプリ内からアカウントを削除できます。アカウント削除により、関連するすべてのデータ（アカウント情報、ウィッシュリストデータ）が完全に削除されます。</p>
-  <p class="en">Users can delete their account from within the App. Deletion permanently removes all associated data.</p>
+  <h2 lang="ja">データの保管</h2>
+  <h2 lang="en">Data Storage</h2>
+  <p lang="ja">ユーザーデータは AWS の東京リージョン（ap-northeast-1）に保管され、通信はすべて HTTPS で暗号化されています。</p>
+  <p lang="en">Your data is stored in the AWS Tokyo region (ap-northeast-1). All communication is encrypted with HTTPS.</p>
 
-  <h2>お子様のプライバシー / Children's Privacy</h2>
-  <p>本アプリは13歳未満のお子様を対象としておらず、意図的に13歳未満のお子様から個人情報を収集することはありません。</p>
-  <p class="en">The App is not intended for children under 13 and does not knowingly collect their personal information.</p>
+  <h2 lang="ja">データの削除</h2>
+  <h2 lang="en">Deleting Your Data</h2>
+  <p lang="ja">ユーザーはアプリ内からアカウントを削除できます。アカウント削除により、関連するすべてのデータ（アカウント情報、ウィッシュリストデータ）が完全に削除されます。</p>
+  <p lang="en">You can delete your account from inside the App. Deleting it permanently removes everything associated with it, including your account information and your wishlist data.</p>
 
-  <h2>プライバシーポリシーの変更 / Changes to This Policy</h2>
-  <p>本ポリシーは予告なく変更される場合があります。重要な変更がある場合はアプリ内で通知します。</p>
-  <p class="en">This policy may be updated without prior notice. Significant changes will be communicated through the App.</p>
+  <h2 lang="ja">お子様のプライバシー</h2>
+  <h2 lang="en">Children&rsquo;s Privacy</h2>
+  <p lang="ja">本アプリは13歳未満のお子様を対象としておらず、意図的に13歳未満のお子様から個人情報を収集することはありません。</p>
+  <p lang="en">The App is not intended for children under 13, and we do not knowingly collect personal information from them.</p>
 
-  <h2>お問い合わせ / Contact</h2>
-  <p>プライバシーに関するお問い合わせ Email: ishibara048app@gmail.com</p>
+  <h2 lang="ja">プライバシーポリシーの変更</h2>
+  <h2 lang="en">Changes to This Policy</h2>
+  <p lang="ja">本ポリシーは予告なく変更される場合があります。重要な変更がある場合はアプリ内で通知します。</p>
+  <p lang="en">This policy may change without prior notice. We will tell you in the App if a change is significant.</p>
 
-  <footer><a href="./">Stash 法的情報トップへ</a></footer>
+  <h2 lang="ja">お問い合わせ</h2>
+  <h2 lang="en">Contact</h2>
+  <p lang="ja">プライバシーに関するお問い合わせ Email: ishibara048app@gmail.com</p>
+  <p lang="en">For privacy questions, email ishibara048app@gmail.com</p>
+
+  <footer>
+    <a href="./" lang="ja">Stash 法的情報トップへ</a>
+    <a href="./" lang="en">Back to Stash Legal</a>
+  </footer>
+
+<script>
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem('stash-legal-lang'); } catch (e) {}
+  var lang = saved || ((navigator.language || 'en').toLowerCase().indexOf('ja') === 0 ? 'ja' : 'en');
+  function apply(next) {
+    document.body.setAttribute('data-lang', next);
+    document.documentElement.setAttribute('lang', next);
+    var buttons = document.querySelectorAll('[data-set-lang]');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].setAttribute('aria-pressed', String(buttons[i].getAttribute('data-set-lang') === next));
+    }
+    try { localStorage.setItem('stash-legal-lang', next); } catch (e) {}
+  }
+  document.addEventListener('click', function (event) {
+    var target = event.target.closest ? event.target.closest('[data-set-lang]') : null;
+    if (target) apply(target.getAttribute('data-set-lang'));
+  });
+  apply(lang);
+})();
+</script>
 </body>
 </html>

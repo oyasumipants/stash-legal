@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stash 法的情報</title>
+<title>Stash 法的情報 / Legal</title>
 <style>
   :root { color-scheme: light dark; }
   body {
@@ -17,14 +17,55 @@
   li { margin: 10px 0; font-size: 16px; }
   a { color: #0a84ff; }
   .muted { color: #8e8e93; font-size: 13px; }
+  /* 言語切り替え。JS が無効なら両方出す（読めないより読めるほうがよい）。 */
+  .lang-switch { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 8px; }
+  .lang-switch button {
+    font: inherit; font-size: 13px; padding: 4px 12px; cursor: pointer;
+    color: #0a84ff; background: transparent;
+    border: 1px solid rgba(128,128,128,.4); border-radius: 999px;
+  }
+  .lang-switch button[aria-pressed="true"] { color: #fff; background: #0a84ff; border-color: #0a84ff; }
+  body[data-lang="ja"] [lang="en"], body[data-lang="en"] [lang="ja"] { display: none; }
 </style>
 </head>
 <body>
-  <h1>Stash 法的情報</h1>
+  <nav class="lang-switch">
+    <button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+    <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+  </nav>
+
+  <h1 lang="ja">Stash 法的情報</h1>
+  <h1 lang="en">Stash Legal</h1>
   <ul>
     <li><a href="./privacy">プライバシーポリシー / Privacy Policy</a></li>
-    <li><a href="./tokushoho">特定商取引法に基づく表記</a></li>
+    <li>
+      <a href="./tokushoho" lang="ja">特定商取引法に基づく表記</a>
+      <a href="./tokushoho" lang="en">Disclosures under the Japanese Act on Specified Commercial Transactions</a>
+    </li>
   </ul>
-  <p class="muted">運営 茨木エンジニアリング</p>
+  <p class="muted" lang="ja">運営 aStone</p>
+  <p class="muted" lang="en">Operated by aStone</p>
+
+<script>
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem('stash-legal-lang'); } catch (e) {}
+  var lang = saved || ((navigator.language || 'en').toLowerCase().indexOf('ja') === 0 ? 'ja' : 'en');
+  function apply(next) {
+    document.body.setAttribute('data-lang', next);
+    document.documentElement.setAttribute('lang', next);
+    var buttons = document.querySelectorAll('[data-set-lang]');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].setAttribute('aria-pressed', String(buttons[i].getAttribute('data-set-lang') === next));
+    }
+    try { localStorage.setItem('stash-legal-lang', next); } catch (e) {}
+  }
+  document.addEventListener('click', function (event) {
+    var target = event.target.closest ? event.target.closest('[data-set-lang]') : null;
+    if (target) apply(target.getAttribute('data-set-lang'));
+  });
+  apply(lang);
+})();
+</script>
 </body>
 </html>
