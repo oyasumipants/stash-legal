@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>特定商取引法に基づく表記 | Stash</title>
+<title>特定商取引法に基づく表記 / Commercial Transactions Disclosures | Stash</title>
 <style>
   :root { color-scheme: light dark; }
   body {
@@ -14,17 +14,38 @@
   @media (prefers-color-scheme: dark) { body { color: #e5e5e7; background: #1c1c1e; } th { color: #a1a1a6 !important; } }
   h1 { font-size: 22px; margin: 0 0 4px; }
   .updated { color: #8e8e93; font-size: 13px; margin: 0 0 24px; }
+  .note { color: #8e8e93; font-size: 13px; margin: 0 0 24px; }
   table { width: 100%; border-collapse: collapse; }
   th, td { text-align: left; vertical-align: top; padding: 12px 8px; border-bottom: 1px solid rgba(128,128,128,.25); font-size: 15px; }
   th { width: 38%; font-weight: 600; color: #3a3a3c; }
   footer { margin-top: 32px; font-size: 13px; color: #8e8e93; }
   a { color: #0a84ff; }
+  .lang-switch { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 8px; }
+  .lang-switch button {
+    font: inherit; font-size: 13px; padding: 4px 12px; cursor: pointer;
+    color: #0a84ff; background: transparent;
+    border: 1px solid rgba(128,128,128,.4); border-radius: 999px;
+  }
+  .lang-switch button[aria-pressed="true"] { color: #fff; background: #0a84ff; border-color: #0a84ff; }
+  body[data-lang="ja"] [lang="en"], body[data-lang="en"] [lang="ja"] { display: none; }
 </style>
 </head>
 <body>
-  <h1>特定商取引法に基づく表記</h1>
-  <p class="updated">最終更新日 2026-06-06</p>
-  <table>
+  <nav class="lang-switch">
+    <button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+    <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+  </nav>
+
+  <h1 lang="ja">特定商取引法に基づく表記</h1>
+  <h1 lang="en">Disclosures under the Japanese Act on Specified Commercial Transactions</h1>
+  <p class="updated" lang="ja">最終更新日 2026-06-06</p>
+  <p class="updated" lang="en">Last updated: 2026-06-06</p>
+  <p class="note" lang="en">
+    This page is a disclosure required of sellers by Japanese law. It is provided in English
+    for transparency; the Japanese text is the authoritative version.
+  </p>
+
+  <table lang="ja">
     <tr><th>販売事業者</th><td>茨木エンジニアリング</td></tr>
     <tr><th>運営統括責任者</th><td>茨木 啓瑚</td></tr>
     <tr><th>所在地</th><td>ご請求をいただいた場合、遅滞なく開示いたします</td></tr>
@@ -39,6 +60,48 @@
     <tr><th>返品・キャンセル</th><td>デジタルコンテンツの性質上、購入手続き完了後の返金・キャンセルはお受けできません。サブスクリプションの自動更新は、次回更新日の24時間前までに「設定 &gt; Apple ID &gt; サブスクリプション」から解約することで停止できます</td></tr>
     <tr><th>動作環境</th><td>iOS 14.0 以降</td></tr>
   </table>
-  <footer><a href="./">Stash 法的情報トップへ</a></footer>
+
+  <table lang="en">
+    <tr><th>Seller</th><td>茨木エンジニアリング (Ibaraki Engineering)</td></tr>
+    <tr><th>Representative</th><td>茨木 啓瑚</td></tr>
+    <tr><th>Address</th><td>Disclosed without delay upon request</td></tr>
+    <tr><th>Phone</th><td>Disclosed without delay upon request</td></tr>
+    <tr><th>Email</th><td>ishibara048app@gmail.com</td></tr>
+    <tr><th>Where we sell</th><td>App Store (listed as &ldquo;Stash コレクション&rdquo;)</td></tr>
+    <tr><th>Price</th><td>Stash Premium: &yen;300 per month or &yen;3,000 per year, tax included. Prices follow what is shown in the App and on the App Store for your region</td></tr>
+    <tr><th>Other charges</th><td>None. Any data charges for your internet connection are your own</td></tr>
+    <tr><th>Payment method</th><td>In-app purchase billed to your Apple ID (App Store payment)</td></tr>
+    <tr><th>When you are charged</th><td>At the time the purchase completes. Subscriptions are charged automatically on each renewal date</td></tr>
+    <tr><th>When service starts</th><td>Immediately after payment completes</td></tr>
+    <tr><th>Refunds and cancellation</th><td>Because this is digital content, we cannot offer refunds or cancellation once a purchase has completed. You can stop a subscription from renewing by cancelling at least 24 hours before the next renewal date in Settings &gt; Apple ID &gt; Subscriptions</td></tr>
+    <tr><th>Requirements</th><td>iOS 14.0 or later</td></tr>
+  </table>
+
+  <footer>
+    <a href="./" lang="ja">Stash 法的情報トップへ</a>
+    <a href="./" lang="en">Back to Stash Legal</a>
+  </footer>
+
+<script>
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem('stash-legal-lang'); } catch (e) {}
+  var lang = saved || ((navigator.language || 'en').toLowerCase().indexOf('ja') === 0 ? 'ja' : 'en');
+  function apply(next) {
+    document.body.setAttribute('data-lang', next);
+    document.documentElement.setAttribute('lang', next);
+    var buttons = document.querySelectorAll('[data-set-lang]');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].setAttribute('aria-pressed', String(buttons[i].getAttribute('data-set-lang') === next));
+    }
+    try { localStorage.setItem('stash-legal-lang', next); } catch (e) {}
+  }
+  document.addEventListener('click', function (event) {
+    var target = event.target.closest ? event.target.closest('[data-set-lang]') : null;
+    if (target) apply(target.getAttribute('data-set-lang'));
+  });
+  apply(lang);
+})();
+</script>
 </body>
 </html>
